@@ -734,11 +734,13 @@ select:focus {
     margin-bottom: var(--spacing-xl);
 }
 
+/* Report Summary Mobile Responsiveness */
 .report-summary {
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     padding: var(--spacing-lg);
+    overflow: hidden;
 }
 
 .report-summary h3 {
@@ -747,12 +749,90 @@ select:focus {
     margin-bottom: var(--spacing-md);
 }
 
+/* Summary table wrapper for mobile scrolling */
+.summary-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 calc(-1 * var(--spacing-lg));
+    padding: 0 var(--spacing-lg);
+}
+
+/* Enhanced data table styles for better mobile experience */
+.data-table th,
+.data-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+}
+
+.data-table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.data-table td {
+    font-size: 0.95rem;
+}
+
+.data-table tfoot th {
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    background-color: #f1f5f9;
+}
+
+/* Summary cards for mobile */
+.summary-cards {
+    display: none;
+}
+
+.summary-card {
+    background-color: #f8fafc;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-card:last-child {
+    margin-bottom: 0;
+}
+
+.summary-card.total {
+    background-color: var(--primary-light);
+    border: 1px solid var(--primary-color);
+    font-weight: 600;
+}
+
+.summary-card-category {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.summary-card-details {
+    text-align: right;
+}
+
+.summary-card-amount {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.summary-card-percentage {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
 /* Utilities */
 .hidden {
     display: none !important;
 }
 
-/* New mobile header styles */
+/* Mobile header styles */
 .mobile-header {
     display: none;
     position: fixed;
@@ -811,6 +891,25 @@ select:focus {
     z-index: 15;
 }
 
+/* Improved scrollbar styling for mobile */
+.summary-table-wrapper::-webkit-scrollbar {
+    height: 4px;
+}
+
+.summary-table-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.summary-table-wrapper::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.summary-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
     .sidebar {
@@ -847,11 +946,12 @@ select:focus {
 
 /* Mobile-specific sidebar changes */
 @media (max-width: 768px) {
+
     /* Show mobile header */
     .mobile-header {
         display: flex;
     }
-    
+
     /* Show menu toggle */
     .menu-toggle {
         display: flex;
@@ -874,7 +974,7 @@ select:focus {
 
     main {
         margin-left: 0;
-        padding-top: 70px; /* Space for the mobile header */
+        padding-top: 25% !important;
     }
 
     /* Show full sidebar text on mobile slide-out */
@@ -910,7 +1010,7 @@ select:focus {
         width: 100%;
         min-width: auto;
     }
-    
+
     .data-table-container {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -959,6 +1059,52 @@ select:focus {
     .budget-actions .btn {
         margin: 0 5px;
     }
+
+    /* Mobile-specific table styles for report summary */
+    .report-summary {
+        padding: var(--spacing-md);
+        margin: 0 calc(-1 * var(--spacing-md));
+        border-radius: 0;
+        box-shadow: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .summary-table-wrapper {
+        margin: 0 calc(-1 * var(--spacing-md));
+        padding: 0 var(--spacing-md);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .data-table {
+        min-width: 400px;
+        font-size: 0.9rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.85rem;
+    }
+
+    .data-table th:first-child,
+    .data-table td:first-child {
+        padding-left: var(--spacing-md);
+        position: sticky;
+        left: 0;
+        background-color: var(--card-bg);
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+    }
+
+    .data-table th:first-child {
+        background-color: #f8fafc;
+    }
+
+    .data-table tfoot th:first-child {
+        background-color: #f1f5f9;
+    }
 }
 
 @media (max-width: 576px) {
@@ -969,7 +1115,7 @@ select:focus {
     .summary-cards {
         grid-template-columns: 1fr;
     }
-    
+
     .form-card {
         width: 100%;
         max-width: 100%;
@@ -1028,8 +1174,32 @@ select:focus {
     .card-content p {
         font-size: 1.25rem;
     }
+
+    /* Small mobile screens for report summary */
+    .report-summary h3 {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .data-table {
+        min-width: 350px;
+        font-size: 0.8rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
+    }
+
+    .data-table th:first-child,
+    .data-table td:first-child {
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
 }
 
+/* Very small screens - Card layout alternative */
 @media (max-width: 360px) {
     main {
         padding: var(--spacing-sm);
@@ -1053,9 +1223,18 @@ select:focus {
     .filters .filter-group {
         min-width: 100%;
     }
-    
+
     .mobile-logo h1 {
         font-size: 1.1rem;
+    }
+
+    /* Card layout for very small screens */
+    .report-summary.card-layout .summary-table-wrapper {
+        display: none;
+    }
+
+    .report-summary.card-layout .summary-cards {
+        display: block;
     }
 }
 

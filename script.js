@@ -22,7 +22,6 @@ function initApp() {
     populateYearSelect();
     setupMobileMenu();
 
-
     // Set the current month and year in reports section
     const now = new Date();
     document.getElementById('report-month').value = now.getMonth();
@@ -121,7 +120,6 @@ function setupEventListeners() {
             this.classList.add('active');
         });
     });
-    
 
     // Transaction related events
     document.getElementById('add-transaction-btn').addEventListener('click', showAddTransactionForm);
@@ -1325,24 +1323,27 @@ function renderIncomeExpenseChart(timeframe, month, year) {
     });
 }
 
-// Render summary table
+// Enhanced render summary table with mobile card layout support
 function renderSummaryTable(timeframe, month, year) {
     const tableBody = document.getElementById('summary-data');
+    const summaryCardsContainer = document.getElementById('summary-cards');
     const totalElement = document.getElementById('summary-total');
+    const reportSummary = document.querySelector('.report-summary');
 
-    // Clear table
+    // Clear both table and cards
     tableBody.innerHTML = '';
+    if (summaryCardsContainer) {
+        summaryCardsContainer.innerHTML = '';
+    }
 
     // Filter transactions based on timeframe
     let filteredTransactions = transactions.filter(t => t.type === 'expense');
 
     if (timeframe === 'daily' || timeframe === 'monthly') {
-        // For daily and monthly, filter by month and year
         filteredTransactions = filteredTransactions.filter(
             t => t.date.getMonth() === month && t.date.getFullYear() === year
         );
-    } else { // yearly
-        // For yearly, filter by year only
+    } else {
         filteredTransactions = filteredTransactions.filter(
             t => t.date.getFullYear() === year
         );
@@ -1365,11 +1366,12 @@ function renderSummaryTable(timeframe, month, year) {
         (a, b) => expensesByCategory[b] - expensesByCategory[a]
     );
 
-    // Generate table rows
+    // Generate table rows and cards
     sortedCategories.forEach(category => {
         const amount = expensesByCategory[category];
         const percentage = totalExpenses > 0 ? (amount / totalExpenses) * 100 : 0;
 
+        // Create table row
         const row = document.createElement('tr');
 
         const categoryCell = document.createElement('td');
@@ -1385,9 +1387,37 @@ function renderSummaryTable(timeframe, month, year) {
         row.appendChild(percentageCell);
 
         tableBody.appendChild(row);
+
+        // Create card for mobile
+        if (summaryCardsContainer) {
+            const card = document.createElement('div');
+            card.className = 'summary-card';
+            card.innerHTML = `
+                <div class="summary-card-category">${category}</div>
+                <div class="summary-card-details">
+                    <div class="summary-card-amount">${formatCurrency(amount)}</div>
+                    <div class="summary-card-percentage">${percentage.toFixed(1)}%</div>
+                </div>
+            `;
+            summaryCardsContainer.appendChild(card);
+        }
     });
 
-    // Update total
+    // Add total card for mobile
+    if (summaryCardsContainer && sortedCategories.length > 0) {
+        const totalCard = document.createElement('div');
+        totalCard.className = 'summary-card total';
+        totalCard.innerHTML = `
+            <div class="summary-card-category">Total</div>
+            <div class="summary-card-details">
+                <div class="summary-card-amount">${formatCurrency(totalExpenses)}</div>
+                <div class="summary-card-percentage">100%</div>
+            </div>
+        `;
+        summaryCardsContainer.appendChild(totalCard);
+    }
+
+    // Update total in table
     totalElement.textContent = formatCurrency(totalExpenses);
 
     // Show empty state if no data
@@ -1397,9 +1427,36 @@ function renderSummaryTable(timeframe, month, year) {
         emptyCell.setAttribute('colspan', '3');
         emptyCell.textContent = 'No expense data for this period';
         emptyCell.style.textAlign = 'center';
+        emptyCell.style.padding = '2rem';
+        emptyCell.style.color = 'var(--text-light)';
         emptyRow.appendChild(emptyCell);
         tableBody.appendChild(emptyRow);
+
+        // Empty state for cards
+        if (summaryCardsContainer) {
+            const emptyCard = document.createElement('div');
+            emptyCard.className = 'summary-card';
+            emptyCard.innerHTML = `
+                <div style="text-align: center; padding: 1rem; color: var(--text-light);">
+                    No expense data for this period
+                </div>
+            `;
+            summaryCardsContainer.appendChild(emptyCard);
+        }
     }
+
+    // Toggle card layout for very small screens
+    function toggleCardLayout() {
+        if (window.innerWidth <= 360 && reportSummary) {
+            reportSummary.classList.add('card-layout');
+        } else if (reportSummary) {
+            reportSummary.classList.remove('card-layout');
+        }
+    }
+
+    // Initial check and resize listener
+    toggleCardLayout();
+    window.addEventListener('resize', toggleCardLayout);
 }
 
 // Set up mobile menu with improved header

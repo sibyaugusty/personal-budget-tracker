@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="app-container">
         <aside class="sidebar">
@@ -19,16 +21,16 @@
             <nav>
                 <ul>
                     <li><a href="#dashboard" class="nav-link active" data-section="dashboard">
-                        <i class="fas fa-home"></i> Dashboard</a>
+                            <i class="fas fa-home"></i> Dashboard</a>
                     </li>
                     <li><a href="#transactions" class="nav-link" data-section="transactions">
-                        <i class="fas fa-exchange-alt"></i> Transactions</a>
+                            <i class="fas fa-exchange-alt"></i> Transactions</a>
                     </li>
                     <li><a href="#budgets" class="nav-link" data-section="budgets">
-                        <i class="fas fa-sliders-h"></i> Budgets</a>
+                            <i class="fas fa-sliders-h"></i> Budgets</a>
                     </li>
                     <li><a href="#reports" class="nav-link" data-section="reports">
-                        <i class="fas fa-chart-bar"></i> Reports</a>
+                            <i class="fas fa-chart-bar"></i> Reports</a>
                     </li>
                 </ul>
             </nav>
@@ -36,7 +38,7 @@
                 <p>Your data is stored locally</p>
             </div>
         </aside>
-        
+
         <main>
             <!-- Dashboard Section -->
             <section id="dashboard" class="section active">
@@ -44,7 +46,7 @@
                     <h2>Dashboard</h2>
                     <p class="date">Today: <span id="current-date"></span></p>
                 </div>
-                
+
                 <div class="summary-cards">
                     <div class="card balance">
                         <div class="card-icon">
@@ -74,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="grid-container">
                     <div class="chart-container">
                         <div class="chart-header">
@@ -84,7 +86,7 @@
                             <canvas id="expense-chart"></canvas>
                         </div>
                     </div>
-                    
+
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3>Income vs Expenses</h3>
@@ -94,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="budget-status">
                     <div class="budget-header">
                         <h3>Budget Status</h3>
@@ -103,7 +105,7 @@
                         <!-- Budget indicators will be populated dynamically -->
                     </div>
                 </div>
-                
+
                 <div class="recent-transactions">
                     <div class="recent-header">
                         <h3>Recent Transactions</h3>
@@ -114,7 +116,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <!-- Transactions Section -->
             <section id="transactions" class="section">
                 <div class="section-header">
@@ -123,7 +125,7 @@
                         <i class="fas fa-plus"></i> Add Transaction
                     </button>
                 </div>
-                
+
                 <div class="transaction-form-container" id="transaction-form-container">
                     <div class="form-card">
                         <div class="form-header">
@@ -173,7 +175,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="filters">
                     <div class="filter-group">
                         <label for="filter-type">Type</label>
@@ -214,7 +216,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="data-table-container">
                     <table id="transactions-table" class="data-table">
                         <thead>
@@ -230,7 +232,7 @@
                             <!-- Transaction rows will be populated dynamically -->
                         </tbody>
                     </table>
-                    
+
                     <div id="no-transactions" class="empty-state hidden">
                         <i class="fas fa-receipt"></i>
                         <p>No transactions found</p>
@@ -238,7 +240,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <!-- Budgets Section -->
             <section id="budgets" class="section">
                 <div class="section-header">
@@ -247,7 +249,7 @@
                         <i class="fas fa-plus"></i> Create Budget
                     </button>
                 </div>
-                
+
                 <div class="budget-form-container" id="budget-form-container">
                     <div class="form-card">
                         <div class="form-header">
@@ -280,24 +282,24 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="budget-grid" id="budget-items">
                     <!-- Budget cards will be populated dynamically -->
                 </div>
-                
+
                 <div id="no-budgets" class="empty-state hidden">
                     <i class="fas fa-sliders-h"></i>
                     <p>No budgets found</p>
                     <button id="add-first-budget" class="btn primary-btn">Create Your First Budget</button>
                 </div>
             </section>
-            
+
             <!-- Reports Section -->
             <section id="reports" class="section">
                 <div class="section-header">
                     <h2>Financial Reports</h2>
                 </div>
-                
+
                 <div class="filters">
                     <div class="filter-group">
                         <label for="report-timeframe">View By</label>
@@ -337,7 +339,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="report-charts">
                     <div class="chart-container full-width">
                         <div class="chart-header">
@@ -347,7 +349,7 @@
                             <canvas id="trends-chart"></canvas>
                         </div>
                     </div>
-                    
+
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3>Category Breakdown</h3>
@@ -356,7 +358,7 @@
                             <canvas id="category-chart"></canvas>
                         </div>
                     </div>
-                    
+
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3>Income vs Expenses</h3>
@@ -366,32 +368,43 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="report-summary">
                     <h3>Expense Summary</h3>
-                    <table id="summary-table" class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>% of Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="summary-data">
-                            <!-- Summary data will be populated dynamically -->
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Total</th>
-                                <th id="summary-total">$0.00</th>
-                                <th>100%</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+
+                    <!-- Table layout for larger screens -->
+                    <div class="summary-table-wrapper">
+                        <table id="summary-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>% of Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="summary-data">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total</th>
+                                    <th id="summary-total">$0.00</th>
+                                    <th>100%</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- Card layout for very small screens -->
+                    <div class="summary-cards" id="summary-cards">
+                        <!-- Dynamic card content will be inserted here -->
+                    </div>
                 </div>
+
             </section>
         </main>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
